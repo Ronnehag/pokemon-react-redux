@@ -6,9 +6,55 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #757F9A;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #D7DDE8, #757F9A);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #D7DDE8, #757F9A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.wrapper {
+  width: 90%;
+  margin: 0 auto;
+}
+.container{
+  display: flex;
+  flex-wrap: wrap;
+}
+.search-div{
+  text-align: center;
+  margin-bottom: 15px;
+  padding: 5px;
+}
+.search-div input[type="text"]{
+  box-sizing: border-box;
+  width: 40%;
+}
+
+.poke-card{
+  flex: 1 0 13%;
+  background: #eee;
+  padding: 5px 10px;
+  margin: 5px 5px 5px 0;
+  text-align: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  transition: all .2s ease-in-out;
+}
+.poke-card:hover{
+ cursor: pointer;
+ border: 1px solid #c0c0c0;
+ transform: scale(1.1);
+}
+.poke-card img{
+  height: 100px;
+}
+.poke-card div{
+  background: #ccc;
+  flex: 1;
+  font-size: 13px;
 }
