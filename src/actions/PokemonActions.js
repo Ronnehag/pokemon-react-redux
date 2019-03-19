@@ -1,4 +1,4 @@
-import { FETCH_POKEMONS } from './types';
+import { FETCH_POKEMONS, FILTER_POKEMONS } from './types';
 
 
 
@@ -9,7 +9,7 @@ export const fetchPokemons = () => {
             dispatch({ type: FETCH_POKEMONS, payload: pokemons });
         } else {
             await fetchData("https://pokeapi.co/api/v2/pokemon", (data) => {
-                localStorage.setItem("pokeList", JSON.stringify(data));
+                localStorage.setItem("pokeList", JSON.stringify(data.slice(0, 807)));
                 dispatch({ type: FETCH_POKEMONS, payload: data.slice(0, 807) });
             });
         }
@@ -31,5 +31,12 @@ async function fetchData(url, cb) {
         console.log(err);
     } finally {
         cb(mainArr);
+    }
+}
+
+export const filterPokemons = (text) => {
+    console.log(text);
+    return function (dispatch) {
+        dispatch({ type: FILTER_POKEMONS, text: text });
     }
 }

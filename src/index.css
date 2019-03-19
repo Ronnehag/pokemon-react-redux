@@ -48,6 +48,8 @@ code {
   justify-content: center;
   border: 1px solid transparent;
   transition: all .2s ease-in-out;
+  max-width: 133px;
+
 }
 .poke-card:hover{
  cursor: pointer;
