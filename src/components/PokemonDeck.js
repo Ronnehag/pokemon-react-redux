@@ -6,8 +6,6 @@ import PokemonCard from './PokemonCard'
 
 export class PokemonDeck extends Component {
 
-  c
-
   componentDidMount() {
     this.props.fetchPokemons();
   }

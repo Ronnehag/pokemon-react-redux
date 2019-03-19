@@ -1,7 +1,5 @@
 import { FETCH_POKEMONS, FILTER_POKEMONS } from './types';
 
-
-
 export const fetchPokemons = () => {
     const pokemons = JSON.parse(localStorage.getItem("pokeList"));
     return async function (dispatch) {
