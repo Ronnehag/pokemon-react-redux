@@ -1,4 +1,5 @@
 import { FETCH_POKEMONS, FILTER_POKEMONS, FETCH_TYPES } from './types';
+import Pokemon from '../models/Pokemon'
 
 export const fetchPokemons = () => {
     const pokemons = JSON.parse(localStorage.getItem("pokeList"));
@@ -21,18 +22,13 @@ async function fetchData(url, cb) {
         const data = await res.json();
         if (data.results.length) {
             let pokemonArr = [];
-            for(let key in data.results){
-                const {name, url} = data.results[key];
-                if(url !== null){
+            for (let key in data.results) {
+                const { name, url } = data.results[key];
+                if (url !== null) {
                     const id = url.split("/pokemon/")[1].replace("/", "");
                     const response = await fetch(url);
-                    const {types} = await response.json();
-                    let pokemon = {
-                        name : name,
-                        url: url,
-                        types: types,
-                        id: id
-                    }
+                    const { types } = await response.json();
+                    let pokemon = new Pokemon(id, name, types, url);
                     pokemonArr.push(pokemon);
                 }
             }
@@ -49,18 +45,16 @@ async function fetchData(url, cb) {
 }
 
 export const filterPokemons = (text) => {
-    console.log(text);
     return function (dispatch) {
         dispatch({ type: FILTER_POKEMONS, text: text });
     }
 }
 
 export const fetchTypes = () => {
-    console.log("fetch");
-    return async function(dispatch){
+    return async function (dispatch) {
         const res = await fetch("https://pokeapi.co/api/v2/type/");
         const json = await res.json();
-        dispatch({type: FETCH_TYPES, payload: json.results});
+        dispatch({ type: FETCH_TYPES, payload: json.results });
     }
 }
 

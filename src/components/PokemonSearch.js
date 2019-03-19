@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { filterPokemons } from '../actions/PokemonActions';
 
 
 export class PokemonSearch extends Component {
 
     handleChange = (e) => {
-        this.props.filterPokemons(e.target.value);
+        this.props.filterPokemons(e.target.value.toLowerCase());
     }
 
     render() {
@@ -20,4 +20,4 @@ export class PokemonSearch extends Component {
 }
 
 
-export default connect(null, {filterPokemons})(PokemonSearch);
+export default connect(null, { filterPokemons })(PokemonSearch);
