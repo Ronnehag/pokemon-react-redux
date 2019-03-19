@@ -7,9 +7,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: #757F9A;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #D7DDE8, #757F9A);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #D7DDE8, #757F9A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+  background: -webkit-linear-gradient(to right, #D7DDE8, #757F9A);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #D7DDE8, #757F9A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+ height: 100%;
+ width: 100%;
 }
 
 code {
@@ -24,6 +25,7 @@ code {
 .container{
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 .search-div{
   text-align: center;
@@ -48,8 +50,7 @@ code {
   justify-content: center;
   border: 1px solid transparent;
   transition: all .2s ease-in-out;
-  max-width: 133px;
-
+  max-width: 140px;
 }
 .poke-card:hover{
  cursor: pointer;

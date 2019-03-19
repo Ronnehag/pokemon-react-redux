@@ -1,4 +1,4 @@
-import { FETCH_POKEMONS, FILTER_POKEMONS } from './types';
+import { FETCH_POKEMONS, FILTER_POKEMONS, FETCH_TYPES } from './types';
 
 export const fetchPokemons = () => {
     const pokemons = JSON.parse(localStorage.getItem("pokeList"));
@@ -20,7 +20,23 @@ async function fetchData(url, cb) {
         const res = await fetch(url);
         const data = await res.json();
         if (data.results.length) {
-            mainArr = [...mainArr, ...data.results];
+            let pokemonArr = [];
+            for(let key in data.results){
+                const {name, url} = data.results[key];
+                if(url !== null){
+                    const id = url.split("/pokemon/")[1].replace("/", "");
+                    const response = await fetch(url);
+                    const {types} = await response.json();
+                    let pokemon = {
+                        name : name,
+                        url: url,
+                        types: types,
+                        id: id
+                    }
+                    pokemonArr.push(pokemon);
+                }
+            }
+            mainArr = [...mainArr, ...pokemonArr];
             if (data.next !== null) {
                 await fetchData(data.next);
             }
@@ -37,4 +53,17 @@ export const filterPokemons = (text) => {
     return function (dispatch) {
         dispatch({ type: FILTER_POKEMONS, text: text });
     }
+}
+
+export const fetchTypes = () => {
+    console.log("fetch");
+    return async function(dispatch){
+        const res = await fetch("https://pokeapi.co/api/v2/type/");
+        const json = await res.json();
+        dispatch({type: FETCH_TYPES, payload: json.results});
+    }
+}
+
+export const filterByTypes = (url) => {
+
 }

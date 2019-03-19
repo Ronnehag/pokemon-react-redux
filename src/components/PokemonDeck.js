@@ -15,14 +15,12 @@ export class PokemonDeck extends Component {
     return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
   }
   pokeList = () => {
-    console.log(this.props.pokemons);
     return this.props.pokemons.length ? (
       this.props.pokemons
         .filter(pokemon => pokemon.name.startsWith(this.props.filter))
-        .map((pokemon, i) => {
-          const { name, url } = pokemon;
-          let img = this.fetchSprite(url);
-          return (<PokemonCard key={i} name={name} img={img} id={i + 1} />);
+        .map((pokemon) => {
+          const { name, url,id } = pokemon;
+          return (<PokemonCard key={id} name={name} img={this.fetchSprite(url)} id={id} />);
         })) : (<p>Loading Pokémons...</p>);
   }
 

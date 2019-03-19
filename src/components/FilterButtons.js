@@ -1,37 +1,29 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { fetchTypes} from '../actions/PokemonActions';
 
-export default class FilterButtons extends Component {
+export class FilterButtons extends Component {
 
-  state = {
-    buttons: [
-      { name: "fire", value: "Fire" },
-      { name: "grass", value: "Grass" },
-      { name: "rock", value: "Rock" },
-      { name: "water", value: "Water" },
-      { name: "ice", value: "Ice" },
-      { name: "ghost", value: "Ghost" },
-      { name: "flying", value: "Flying" },
-      { name: "psychic", value: "Psychic" },
-      { name: "metal", value: "Metal" },
-      { name: "bug", value: "Bug" },
-      { name: "fighting", value: "Fighting" },
-      { name: "dragon", value: "Dragon" },
-      { name: "normal", value: "Normal" },
-    ]
+  componentDidMount() {
+    this.props.fetchTypes();
+  }
+
+  handleClick = (e) => {
+    // if target.checked
+    // dispatch call addTypeFilter
   }
 
   renderBtns = () => {
-    return this.state.buttons.map(button => {
+    return this.props.types.map(({name, url}) => {
       return (
-        <div>
-          <label>{button.value}</label>
-          <input type="checkbox" name={button.name} value={button.value} />
+        <div key={name}>
+          <label>{name}</label>
+          <input type="checkbox" name={name} value={url} onClick={this.handleClick}/>
         </div>
       )
     });
   }
-
-
 
   render() {
     return (
@@ -42,3 +34,9 @@ export default class FilterButtons extends Component {
     )
   }
 }
+
+const mapStateToProps = (state) => ({
+  types: state.pokemons.types
+});
+
+export default connect(mapStateToProps, { fetchTypes })(FilterButtons);

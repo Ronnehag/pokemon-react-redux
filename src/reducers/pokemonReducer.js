@@ -1,8 +1,10 @@
-import { FETCH_POKEMONS, FILTER_POKEMONS } from '../actions/types';
+import { FETCH_POKEMONS, FILTER_POKEMONS, FETCH_TYPES } from '../actions/types';
 
 const initialState = {
     pokemonList: [],
-    filter: ""
+    filter: "",
+    checkedFilterButtons: [],
+    types: []
 }
 
 export default function (state = initialState, action) {
@@ -17,6 +19,12 @@ export default function (state = initialState, action) {
             return Object.assign({}, state, {
                 filter: action.text
             });
+        case FETCH_TYPES:
+        return {
+            ...state,
+            types: action.payload
+        }
+
         default:
             return state;
     }
