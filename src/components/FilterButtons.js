@@ -25,7 +25,7 @@ export default class FilterButtons extends Component {
       return (
         <div>
           <label>{button.value}</label>
-          <input type="radio" name={button.name} value={button.value} />
+          <input type="checkbox" name={button.name} value={button.value} />
         </div>
       )
     });

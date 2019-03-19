@@ -33,6 +33,10 @@ code {
 .search-div input[type="text"]{
   box-sizing: border-box;
   width: 40%;
+  background: #34495e;
+  border: 1px solid black;
+  height: 30px;
+  color: #fff;
 }
 
 .poke-card{
