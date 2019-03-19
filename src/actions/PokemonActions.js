@@ -1,4 +1,4 @@
-import { FETCH_POKEMONS, FILTER_POKEMONS, FETCH_TYPES } from './types';
+import { FETCH_POKEMONS, FILTER_POKEMONS, FETCH_TYPES, ADD_FILTER_BY_TYPES, REMOVE_FILTER_BY_TYPES } from './types';
 import Pokemon from '../models/Pokemon'
 
 export const fetchPokemons = () => {
@@ -28,7 +28,11 @@ async function fetchData(url, cb) {
                     const id = url.split("/pokemon/")[1].replace("/", "");
                     const response = await fetch(url);
                     const { types } = await response.json();
-                    let pokemon = new Pokemon(id, name, types, url);
+                    let pokeTypes = [];
+                    for (let key in types) {
+                        pokeTypes.push(types[key].type.name);
+                    }
+                    let pokemon = new Pokemon(id, name, pokeTypes, url);
                     pokemonArr.push(pokemon);
                 }
             }
@@ -58,6 +62,14 @@ export const fetchTypes = () => {
     }
 }
 
-export const filterByTypes = (url) => {
+export const addTypeFilter = (type) => {
+    return function (dispatch) {
+        dispatch({ type: ADD_FILTER_BY_TYPES, payload: type })
+    }
+}
 
+export const removeTypeFilter = (type) => {
+    return function (dispatch) {
+        dispatch({ type: REMOVE_FILTER_BY_TYPES, payload: type })
+    }
 }

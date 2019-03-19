@@ -1,4 +1,4 @@
-import { FETCH_POKEMONS, FILTER_POKEMONS, FETCH_TYPES } from '../actions/types';
+import { FETCH_POKEMONS, FILTER_POKEMONS, FETCH_TYPES, ADD_FILTER_BY_TYPES, REMOVE_FILTER_BY_TYPES } from '../actions/types';
 
 const initialState = {
     pokemonList: [],
@@ -20,10 +20,21 @@ export default function (state = initialState, action) {
                 filter: action.text
             });
         case FETCH_TYPES:
-        return {
-            ...state,
-            types: action.payload
-        }
+            return {
+                ...state,
+                types: action.payload
+            }
+        case ADD_FILTER_BY_TYPES:
+            return {
+                ...state,
+                checkedFilterButtons: [...state.checkedFilterButtons, action.payload]
+            }
+
+        case REMOVE_FILTER_BY_TYPES:
+            return {
+                ...state,
+                checkedFilterButtons: [...state.checkedFilterButtons.filter(type => type !== action.payload)]
+            }
 
         default:
             return state;
