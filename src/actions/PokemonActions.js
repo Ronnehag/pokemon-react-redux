@@ -36,7 +36,7 @@ async function fetchData(url, cb) {
                     pokemonArr.push(pokemon);
                 }
             }
-            mainArr = [...mainArr, ...pokemonArr];
+            mainArr.push(...pokemonArr);
             if (data.next !== null) {
                 await fetchData(data.next);
             }
