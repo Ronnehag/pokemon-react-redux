@@ -4,7 +4,8 @@ const initialState = {
     pokemonList: [],
     filter: "",
     checkedFilterButtons: [],
-    types: []
+    types: [],
+    pokemon: ""
 }
 
 export default function (state = initialState, action) {

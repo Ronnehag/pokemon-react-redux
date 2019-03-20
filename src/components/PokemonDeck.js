@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { fetchPokemons } from '../actions/PokemonActions';
 import PokemonCard from './PokemonCard'
 
@@ -20,7 +21,6 @@ export class PokemonDeck extends Component {
     return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
   }
 
-  // TODO filter if more than 1 type
   pokeList = () => {
     let pokemonList = this.props.pokemons;
     if (this.props.pokemons.length > 0) {
@@ -36,7 +36,12 @@ export class PokemonDeck extends Component {
 
     return pokemonList.map(pokemon => {
       const { name, url, id } = pokemon;
-      return (<PokemonCard key={id} name={name} img={this.fetchSprite(url)} id={id} />);
+      return (
+        <Link to={`/pokemon/${name}`}>
+          <PokemonCard key={id} name={name} img={this.fetchSprite(url)} id={id} />
+        </Link>
+      )
+        ;
     });
   }
 
