@@ -30,6 +30,7 @@ class PokemonInfo extends Component {
     render() {
         if (this.state.pokedata.id) {
             const { id, name, stats, types, weight, height, base_experience, sprites } = this.state.pokedata;
+            console.log(this.state.pokedata);
             return (
                 <div>
                     <h3 onClick={this.handleClick}>Return</h3>

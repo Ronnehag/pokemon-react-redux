@@ -27,16 +27,18 @@ async function fetchData(url, cb) {
                 if (url !== null) {
                     const id = url.split("/pokemon/")[1].replace("/", "");
                     const response = await fetch(url);
-                    const { types } = await response.json();
+                    const dat = await response.json();
+                    const { types, base_experience, sprites, stats } = dat;
                     let pokeTypes = [];
                     for (let key in types) {
                         pokeTypes.push(types[key].type.name);
                     }
-                    let pokemon = new Pokemon(id, name, pokeTypes, url);
+                    let pokemon = new Pokemon(id, name, pokeTypes, url, base_experience, sprites, stats);
                     pokemonArr.push(pokemon);
                 }
             }
             mainArr.push(...pokemonArr);
+            if (mainArr.length === 807) cb(mainArr);
             if (data.next !== null) {
                 await fetchData(data.next);
             }
