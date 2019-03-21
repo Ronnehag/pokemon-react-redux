@@ -15,10 +15,15 @@ export class Pokemon {
     }
 
     getWeight() {
-        let arr = this.weight.toString().split();
+        let arr = this.weight.toString().split('');
         switch (arr.length) {
             case 2:
-                return arr.splice(1, 0, ".").join('').toString();
+                arr.splice(1, 0, ".");
+                return arr.join('');
+
+            case 3:
+                arr.splice(2, 0, ".");
+                return arr.join('');
 
             default: return this.weight.toString();
         }

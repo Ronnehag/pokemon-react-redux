@@ -40,7 +40,7 @@ class PokemonInfoDetails extends Component {
                             <br />
                             <p>
                                 height: {height.toString().split('').join('.') + " m"} <br />
-                                weight: {pokemon.getWeight()}
+                                weight: {pokemon !== undefined && pokemon.getWeight() + " kg"}
                             </p>
                         </section>
 
