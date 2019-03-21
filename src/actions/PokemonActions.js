@@ -48,10 +48,8 @@ async function fetchData(url, cb) {
     }
 }
 
-export const filterPokemons = (text) => {
-    return function (dispatch) {
-        dispatch({ type: FILTER_POKEMONS, text: text });
-    }
+export const filterPokemons = (text) => dispatch => {
+    dispatch({ type: FILTER_POKEMONS, text: text });
 }
 
 export const fetchTypes = () => {

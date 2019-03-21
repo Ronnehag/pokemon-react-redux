@@ -9,6 +9,10 @@ class PokemonInfo extends Component {
         pokedata: {}
     }
 
+    handleClick = (e) => {
+        this.props.history.push("/");
+    }
+
     async componentDidMount() {
         try {
             const res = await fetch(this.props.pokemon.url);
@@ -24,11 +28,11 @@ class PokemonInfo extends Component {
 
 
     render() {
-
-        if (this.state.pokedata !== undefined) {
+        if (this.state.pokedata.id) {
             const { id, name, stats, types, weight, height, base_experience, sprites } = this.state.pokedata;
             return (
                 <div>
+                    <h3 onClick={this.handleClick}>Return</h3>
                     <PokemonInfoDetails
                         id={id}
                         name={name}
@@ -51,7 +55,7 @@ class PokemonInfo extends Component {
 }
 
 PokemonInfo.propTypes = {
-    pokemon : PropType.object.isRequired
+    pokemon: PropType.object.isRequired
 }
 
 
