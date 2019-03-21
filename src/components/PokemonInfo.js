@@ -35,6 +35,7 @@ class PokemonInfo extends Component {
                 <div>
                     <h3 onClick={this.handleClick}>Return</h3>
                     <PokemonInfoDetails
+                        pokemon={this.props.pokemon}
                         id={id}
                         name={name}
                         stats={stats}

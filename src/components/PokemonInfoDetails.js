@@ -2,21 +2,7 @@ import React, { Component } from 'react'
 
 class PokemonInfoDetails extends Component {
 
-    getWeight = (weight) => {
-        weight = weight.toString().split('');
-        switch (weight.length) {
-            case 2:
-                let temp = weight.splice(1, 0, ".").join('');
-                return temp.toString();
 
-            case 3:
-                return "Hello"
-
-
-            default: return 0;
-        }
-
-    }
 
 
     getStats = () => {
@@ -31,9 +17,10 @@ class PokemonInfoDetails extends Component {
     }
 
     render() {
-        const { id, name, height, weight } = this.props;
+        const { id, name, height, weight, pokemon } = this.props;
         const { back_default, front_default } = this.props.sprites;
         const { types } = this.props.types;
+        console.log(pokemon);
         return (
             <div className="container">
                 <div className="card">
@@ -53,7 +40,7 @@ class PokemonInfoDetails extends Component {
                             <br />
                             <p>
                                 height: {height.toString().split('').join('.') + " m"} <br />
-                                weight: {this.getWeight(weight) + " kg"}
+                                weight: {pokemon.getWeight()}
                             </p>
                         </section>
 

@@ -5,7 +5,17 @@ export const fetchPokemons = () => {
     const pokemons = JSON.parse(localStorage.getItem("pokeList"));
     return async function (dispatch) {
         if (pokemons !== null) {
-            dispatch({ type: FETCH_POKEMONS, payload: pokemons });
+            let pokemonsArr = [];
+            pokemons.forEach(pokemon => {
+                let pokeTypes = [];
+                for (let key in pokemon.types) {
+                    pokeTypes.push(pokemon.types[key]);
+                }
+                let poke = new Pokemon(pokemon.id, pokemon.name, pokeTypes, pokemon.url,
+                    pokemon.base_experience, pokemon.sprites, pokemon.stats, pokemon.weight, pokemon.height);
+                pokemonsArr.push(poke);
+            });
+            dispatch({ type: FETCH_POKEMONS, payload: pokemonsArr });
         } else {
             await fetchData("https://pokeapi.co/api/v2/pokemon", (data) => {
                 localStorage.setItem("pokeList", JSON.stringify(data.slice(0, 807)));
@@ -28,12 +38,12 @@ async function fetchData(url, cb) {
                     const id = url.split("/pokemon/")[1].replace("/", "");
                     const response = await fetch(url);
                     const dat = await response.json();
-                    const { types, base_experience, sprites, stats } = dat;
+                    const { types, base_experience, sprites, stats, weight, height } = dat;
                     let pokeTypes = [];
                     for (let key in types) {
                         pokeTypes.push(types[key].type.name);
                     }
-                    let pokemon = new Pokemon(id, name, pokeTypes, url, base_experience, sprites, stats);
+                    let pokemon = new Pokemon(id, name, pokeTypes, url, base_experience, sprites, stats, weight, height);
                     pokemonArr.push(pokemon);
                 }
             }
